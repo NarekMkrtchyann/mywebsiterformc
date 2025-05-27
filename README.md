@@ -5,7 +5,7 @@
     <title>Իմ Minecraft Սերվերը</title>
 </head>
 <body>
-    <h1>Բարի գալուստ իմ Minecraft սերվերի կայք</h1>
+    <h1>Բարի գալուտ իմ Minecraft սերվերի կայք</h1>
     <p>Սերվերի հասցե՝ <strong>play.example.com</strong></p>
     <div id="status">Սերվերի վիճակը բեռնվում է...</div>
 
