@@ -2,24 +2,45 @@
 <html lang="hy">
 <head>
     <meta charset="UTF-8">
-    <title>Իմ Minecraft Սերվերը</title>
+    <title>Անվճար Minecraft Սերվեր</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #message {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <h1>Բարի գալուստ իմ Minecraft սերվերի կայք</h1>
-    <p>Սերվերի հասցե՝ <strong>play.example.com</strong></p>
-    <div id="status">Սերվերի վիճակը բեռնվում է...</div>
+    <h1>Ստեղծիր քո անվճար Minecraft սերվերը</h1>
+    <input type="text" id="serverName" placeholder="Սերվերի անունը">
+    <br>
+    <button onclick="createServer()">Ստեղծել սերվեր</button>
+
+    <div id="message"></div>
 
     <script>
-        fetch("https://api.mcsrvstat.us/2/play.example.com")
-        .then(response => response.json())
-        .then(data => {
-            const statusDiv = document.getElementById("status");
-            if (data.online) {
-                statusDiv.innerHTML = `Սերվերը առցանց է։ Խաղացողներ՝ ${data.players.online}`;
-            } else {
-                statusDiv.innerHTML = "Սերվերը անջատված է։";
+        function createServer() {
+            const name = document.getElementById("serverName").value;
+            if (name.trim() === "") {
+                alert("Խնդրում եմ մուտքագրիր սերվերի անունը։");
+                return;
             }
-        });
+
+            // Այստեղ հետագայում կարող ես միացնել backend
+            document.getElementById("message").innerText =
+                `Շնորհակալություն, քո սերվերի (${name}) հարցումը ուղարկված է։`;
+        }
     </script>
 </body>
 </html>
