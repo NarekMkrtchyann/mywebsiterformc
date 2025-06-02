@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minecraft Host Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <nav>
+          <a href="dashboard.html">Servers</a>
+          <!-- Add more sections as needed -->
+        </nav>
+    </header>
+    <div class="dashboard-container">
+        <h2>Your Servers</h2>
+        <div class="server-list" id="serverList"></div>
+    </div>
+    <script>
+    async function loadServers() {
+        let res = await fetch('/api/servers');
+        let servers = await res.json();
+        let html = '';
+        servers.forEach(srv => {
+            html += `<div class="server-item">
+                <b>${srv.name}</b> — Status: <span style="color:${srv.status==='online'?'green':'red'}">${srv.status}</span> — Players: ${srv.players}
+                <div class="actions">
+                    <button onclick="startServer(${srv.id})" ${srv.status==='online'?'disabled':''}>Start</button>
+                    <button onclick="stopServer(${srv.id})" ${srv.status==='offline'?'disabled':''}>Stop</button>
+                </div>
+            </div>`;
+        });
+        document.getElementById('serverList').innerHTML = html;
+    }
+    async function startServer(id) {
+        await fetch('/api/server/' + id + '/start', {method:'POST'});
+        loadServers();
+    }
+    async function stopServer(id) {
+        await fetch('/api/server/' + id + '/stop', {method:'POST'});
+        loadServers();
+    }
+    loadServers();
+    </script>
+</body>
+</html>
